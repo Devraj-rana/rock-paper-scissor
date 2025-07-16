@@ -102,6 +102,9 @@ export default function Game() {
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-4 font-headline">
           RPS Showdown
         </h1>
+        <p className="text-muted-foreground text-center mb-8 max-w-md">
+          Welcome to Rock, Paper, Scissors! Click one of the buttons below to make your move. Can you beat the app?
+        </p>
 
         <Card className="w-full max-w-sm mb-8 shadow-lg">
           <CardHeader>

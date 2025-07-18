@@ -68,18 +68,16 @@ export default function Game() {
     setOutcome(null);
 
     setTimeout(() => {
-      let appChoice = moves[Math.floor(Math.random() * moves.length)].name;
+      const availableMoves = moves.map(m => m.name);
+      let appChoice: Move;
 
-      // If it's a draw, re-roll once to reduce draw frequency
-      if (move === appChoice) {
-        appChoice = moves[Math.floor(Math.random() * moves.length)].name;
-      }
+      do {
+        appChoice = availableMoves[Math.floor(Math.random() * availableMoves.length)];
+      } while (move === appChoice);
       
       setAppMove(appChoice);
 
-      if (move === appChoice) {
-        setOutcome("It's a Draw!");
-      } else if (
+      if (
         (move === "stone" && appChoice === "scissors") ||
         (move === "scissors" && appChoice === "paper") ||
         (move === "paper" && appChoice === "stone")

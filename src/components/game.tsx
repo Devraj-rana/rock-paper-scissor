@@ -1,14 +1,13 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Hand, Scissors, RotateCcw, Loader2, File } from "lucide-react";
+import { Hand, Scissors, RotateCcw, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 type Move = "stone" | "paper" | "scissors";
 type Outcome = "You Win!" | "You Lose!" | "It's a Draw!" | null;
-
 const moves: { name: Move; icon: React.ElementType; color: string, label: string; iconProps?: any }[] = [
   { name: "stone", icon: Hand, color: "bg-primary text-primary-foreground hover:bg-primary/90", label: "Stone" },
   { name: "paper", icon: Hand, color: "bg-yellow text-yellow-foreground hover:bg-yellow/90", label: "Paper", iconProps: { style: { transform: "rotate(90deg)" } } },

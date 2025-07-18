@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Hand, Scissors, RotateCcw, Loader2 } from "lucide-react";
+import { Hand, Scissors, RotateCcw, Loader2, File } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -11,14 +11,13 @@ type Outcome = "You Win!" | "You Lose!" | "It's a Draw!" | null;
 
 const moves: { name: Move; icon: React.ElementType; color: string, label: string }[] = [
   { name: "stone", icon: Hand, color: "bg-primary text-primary-foreground hover:bg-primary/90", label: "Stone" },
-  { name: "paper", icon: Hand, color: "bg-yellow text-yellow-foreground hover:bg-yellow/90", label: "Paper" },
+  { name: "paper", icon: File, color: "bg-yellow text-yellow-foreground hover:bg-yellow/90", label: "Paper" },
   { name: "scissors", icon: Scissors, color: "bg-accent text-accent-foreground hover:bg-accent/90", label: "Scissors" },
 ];
 
 const MoveDisplay = ({ move, isWinner }: { move: Move | null; isWinner: boolean }) => {
   const moveData = moves.find((m) => m.name === move);
-  const iconStyle = move === 'paper' ? { transform: 'rotate(-90deg) scaleX(-1)'} : {};
-
+  
   return (
     <div
       className={cn(
@@ -29,7 +28,7 @@ const MoveDisplay = ({ move, isWinner }: { move: Move | null; isWinner: boolean 
     >
        <div className="absolute inset-0 bg-background/30 rounded-full"></div>
       {moveData ? (
-        <moveData.icon style={iconStyle} className={cn("h-16 w-16 sm:h-20 sm:w-20 transition-all", isWinner ? "text-white" : "text-foreground/80")} />
+        <moveData.icon className={cn("h-16 w-16 sm:h-20 sm:w-20 transition-all", isWinner ? "text-white" : "text-foreground/80")} />
       ) : (
         <div className="h-16 w-16 sm:h-20 sm:w-20" />
       )}
@@ -114,17 +113,17 @@ export default function Game() {
             </p>
 
             <div className="flex flex-col items-center gap-6">
-                <p className="text-lg font-semibold text-center">{outcome || isChoosing ? "Play again?" : "Make your move!"}</p>
+                <p className="text-lg font-semibold text-center">Make your move!</p>
                 <div className="flex flex-col gap-4 w-full max-w-xs">
                     {moves.map((move) => (
                         <Button
                             key={move.name}
                             onClick={() => handlePlay(move.name)}
-                            className={cn("h-16 text-lg justify-start pl-6 shadow-lg transform transition-transform hover:scale-105", move.color, move.name === 'paper' && 'flex-row-reverse justify-end pr-6')}
+                            className={cn("h-16 text-lg justify-start pl-6 shadow-lg transform transition-transform hover:scale-105", move.color)}
                             disabled={isChoosing}
                             aria-label={move.name}
                         >
-                            <move.icon className={cn("mr-4 h-8 w-8", move.name === 'paper' && 'ml-4 mr-0 -scale-x-100 rotate-90')} />
+                            <move.icon className="mr-4 h-8 w-8" />
                             <span>{move.label}</span>
                         </Button>
                     ))}

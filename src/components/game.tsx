@@ -9,9 +9,9 @@ import { cn } from "@/lib/utils";
 type Move = "stone" | "paper" | "scissors";
 type Outcome = "You Win!" | "You Lose!" | "It's a Draw!" | null;
 
-const moves: { name: Move; icon: React.ElementType; color: string, label: string }[] = [
+const moves: { name: Move; icon: React.ElementType; color: string, label: string; iconProps?: any }[] = [
   { name: "stone", icon: Hand, color: "bg-primary text-primary-foreground hover:bg-primary/90", label: "Stone" },
-  { name: "paper", icon: File, color: "bg-yellow text-yellow-foreground hover:bg-yellow/90", label: "Paper" },
+  { name: "paper", icon: Hand, color: "bg-yellow text-yellow-foreground hover:bg-yellow/90", label: "Paper", iconProps: { style: { transform: "rotate(90deg)" } } },
   { name: "scissors", icon: Scissors, color: "bg-accent text-accent-foreground hover:bg-accent/90", label: "Scissors" },
 ];
 
@@ -28,7 +28,7 @@ const MoveDisplay = ({ move, isWinner }: { move: Move | null; isWinner: boolean 
     >
        <div className="absolute inset-0 bg-background/30 rounded-full"></div>
       {moveData ? (
-        <moveData.icon className={cn("h-16 w-16 sm:h-20 sm:w-20 transition-all", isWinner ? "text-white" : "text-foreground/80")} />
+        <moveData.icon {...moveData.iconProps} className={cn("h-16 w-16 sm:h-20 sm:w-20 transition-all", isWinner ? "text-white" : "text-foreground/80")} />
       ) : (
         <div className="h-16 w-16 sm:h-20 sm:w-20" />
       )}
@@ -67,7 +67,7 @@ export default function Game() {
     setOutcome(null);
 
     setTimeout(() => {
-      const availableMoves = moves.map(m => m.name);
+      const availableMoves: Move[] = ["stone", "paper", "scissors"];
       let appChoice: Move;
 
       do {
@@ -123,7 +123,7 @@ export default function Game() {
                             disabled={isChoosing}
                             aria-label={move.name}
                         >
-                            <move.icon className="mr-4 h-8 w-8" />
+                            <move.icon {...move.iconProps} className="mr-4 h-8 w-8" />
                             <span>{move.label}</span>
                         </Button>
                     ))}

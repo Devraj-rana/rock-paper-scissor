@@ -154,7 +154,7 @@ export default function Game() {
           </div>
         )}
 
-        {!playerMove || !isChoosing && (
+        {!isChoosing && (
           <div className="flex flex-col items-center gap-6 animate-in fade-in duration-500">
               <p className="text-lg font-semibold">{outcome ? "Play again?" : "Make your move!"}</p>
               <div className="flex flex-wrap justify-center gap-4">
